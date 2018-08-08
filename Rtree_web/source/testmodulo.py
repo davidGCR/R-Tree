@@ -29,8 +29,8 @@ vc_obj.rtree_insert(lista)
 # vc_obj.rtree_insert([3,6,5,7])
 # print vc_obj.rtree_size()
 
-result = []
-print vc_obj.rangeQuery([4,5,6,7,7])
+result = vc_obj.rangeQuery([4,5,6,7,7])
+print result
 for r in result:
     print r
 # from tree_ext import *

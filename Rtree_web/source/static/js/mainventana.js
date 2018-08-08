@@ -10,13 +10,13 @@ rect = {},drag = false;
     //ev.preventDefault();
 //});
 ////////////////////// Insertar poligono nuevo ///////////////////////
-function test_func(data) {
-        console.log(data);
+function test_func(){
+
 }
+
 
 $(document).ready(function(){
     console.log("codigo facilito");
-
     $('#b_ajax').click(function(){
         //console.log("aquiiiii");
         //console.log(perimeter);
@@ -36,9 +36,25 @@ $(document).ready(function(){
            }
        });
     });
-
 });
-///////////////////////////////////////////////////////////////////////
+/////////////////////////////range query//////////////////////////////////////////
+function consultarRegion()
+{
+    var url = "/rangeQuery";
+
+    $.ajax({
+            type: 'POST',
+            url: url,
+            contentType: 'application/json',
+            data: JSON.stringify(perimeter),
+            success: function(response) {
+                console.log(response);
+            }
+    });
+
+
+}
+/////////////////////////////////////////////////////////////////////////
 
 var funcEvent = function(ev) {
            console.log('evento activar punto');
@@ -242,7 +258,14 @@ function queryRange(){
     console.log('desactivo?');
     //document.getElementById("punto").disabled = true;
     initRange();
+    //consultarRegion();
 }
+
+
+
+
+
+
 function initRange() {
   canvas.addEventListener('mousedown', mouseDown, false);
   canvas.addEventListener('mouseup', mouseUp, false);

@@ -17,6 +17,8 @@ app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
 class ReusableForm(Form):
     k_element = TextField('Elements for query nearest:', validators=[validators.required()])
 
+
+
 @app.route('/rtree', methods=['GET', 'POST'])
 def rtree():
     form = ReusableForm(request.form)
@@ -63,6 +65,26 @@ def ajax_test():
 
         #print("data is " + format(datos))
         return json.dumps(datos)
+
+####################consultar #####################
+@app.route('/rangeQuery', methods =['POST'])
+def rangeQuery():
+
+    datos = request.json
+    puntosInput=[]
+    for coordenada in datos:
+        x = coordenada['x']
+        y= coordenada['y']
+        puntosInput.append(x)
+        puntosInput.append(y)
+
+    puntosOutput = vc_obj.rangeQuery(puntosInput)
+    print puntosOutput
+    dataResult = json.dumps(puntosOutput)
+
+        #print("data is " + format(datos))
+    return  render_template('ventana.html', dataResult=dataResult)
+        #return render_template('ventana.html',dataResult=json.dumps(puntosOutput))
 
 @app.route('/<path:path>')
 def send_images(path):
