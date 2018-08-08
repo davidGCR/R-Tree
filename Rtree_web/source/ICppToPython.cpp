@@ -3,89 +3,8 @@
 #include <vector>
 using namespace std;
 
-
-
-class MBR{
-    int id;
-    int cx;
-    int cy;
-    int alto;
-    int ancho;
-public: 
-    MBR(){}
-    MBR(int id, int x, int y,int ancho, int alto){
-        this->id=id;
-        this->cx=x;
-        this->cy=y;
-        this->ancho=ancho;
-        this->alto=alto;
-
-    }
-    int getId(){
-        return id;
-    }
-    int getXmin(){
-        return cx;
-    }
-    int getYmin(){
-        return cx;
-    }
-    int getXmax(){
-        return cx+ancho;
-    }
-    int getYmax(){
-        return cy+alto;
-    }
-    string getString(){
-        
-        int cx2=cx+ancho;
-        int cy2=cy+alto;
-        string p1="("+ to_string(cx) + "," + to_string(cy) + ")";
-        string p2="("+ to_string(cx2) + "," + to_string(cy2) + ")";
-
-        return  p1+"-"+p2;
-    }
-    bool operator==(MBR const& x) const { 
-        return id == x.id; 
-    }
-    bool operator!=(MBR const& x) const { 
-        return id != x.id; 
-    }
-};
-
-
 // typedef std::vector<MBR> MyList;
 
-class ICppToPython{
-    vector<MBR>* rtree;
-public:
-    ICppToPython(){
-    }
-    ICppToPython(int a){
-        rtree = new vector<MBR>();
-    }
-    // ICppToPython(int a){
-    //     //rtree = new vector<Polygon>();
-    // }
-    int loadMbrs(){
-        
-        //test
-        MBR *pg1 = new MBR(0,3,4,2,4);
-        MBR *pg2 = new MBR(1,4,3,6,7);
-        MBR *pg3 = new MBR(2,5,7,5,5);
-        rtree->push_back(*pg1);
-        rtree->push_back(*pg2);
-        rtree->push_back(*pg3);
-        return rtree->size();
-    }
-    vector<int> getMbrs(){
-        vector<int> puntos;
-        for(int i=0;i<rtree->size();i++){
-            puntos.push_back((*rtree)[i].getId());
-        }
-        return puntos;
-    }
-};
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class Rtree{
     vector<Polygon>* regiones;
@@ -249,10 +168,10 @@ boost::python::list vc::rangeQuery(boost::python::list pts){
 //#include <Python.h>
 
 
-int load(){
-    ICppToPython app = ICppToPython(4);
-    return app.loadMbrs();
-}
+// int load(){
+//     ICppToPython app = ICppToPython(4);
+//     return app.loadMbrs();
+// }
 // int main(){
 //     ICppToPython app = ICppToPython();
 //     cout<<"se añadio"<<app.loadPolygons()<<endl;
